@@ -1,0 +1,17 @@
+<Project>
+  <PropertyGroup Condition="'$(SWPILOT_SOLIDWORKS_DIR)' != ''">
+    <SwpilotSolidWorksInteropDir>$(SWPILOT_SOLIDWORKS_DIR)\api\redist</SwpilotSolidWorksInteropDir>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(SwpilotSolidWorksInteropDir)' != ''">
+    <Reference Update="SolidWorks.Interop.sldworks">
+      <HintPath>$(SwpilotSolidWorksInteropDir)\SolidWorks.Interop.sldworks.dll</HintPath>
+    </Reference>
+    <Reference Update="SolidWorks.Interop.swconst">
+      <HintPath>$(SwpilotSolidWorksInteropDir)\SolidWorks.Interop.swconst.dll</HintPath>
+    </Reference>
+    <Reference Update="SolidWorks.Interop.swpublished">
+      <HintPath>$(SwpilotSolidWorksInteropDir)\SolidWorks.Interop.swpublished.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

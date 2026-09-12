@@ -1118,7 +1118,13 @@ namespace SwpilotCLIAddin
                         "Select-Object -First 1 -ExpandProperty FullName; " +
                         "}}; " +
                         "if (-not $codexExe) {{ throw 'Codex CLI was not found. Install or update the Codex app, then restart SOLIDWORKS.' }}; " +
-                        "& $codexExe{1}",
+                        "$swKey = Get-ChildItem 'HKLM:\\SOFTWARE\\SolidWorks' -ErrorAction SilentlyContinue | " +
+                        "Where-Object PSChildName -Match '^SOLIDWORKS \\d{{4}}$' | Sort-Object PSChildName -Descending | Select-Object -First 1; " +
+                        "if ($swKey) {{ " +
+                        "$swSetup = Get-ItemProperty -LiteralPath (Join-Path $swKey.PSPath 'Setup') -ErrorAction SilentlyContinue; " +
+                        "$env:SWPILOT_SOLIDWORKS_DIR = $swSetup.'SolidWorks Folder'; " +
+                        "}}; " +
+                        "& $codexExe -s danger-full-access -a never{1}",
                         codexLaunchDir,
                         codexResumeArg);
                 case "cmd":
