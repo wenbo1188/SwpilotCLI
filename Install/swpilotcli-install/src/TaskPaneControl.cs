@@ -1109,7 +1109,18 @@ namespace SwpilotCLIAddin
                             codexLaunchDir = resolvedSessionDir.Replace("'", "''");
                     }
 
-                    return string.Format("Set-Location -LiteralPath '{0}'; codex{1}", codexLaunchDir, codexResumeArg);
+                    return string.Format(
+                        "Set-Location -LiteralPath '{0}'; " +
+                        "$codexExe = (Get-Command codex -ErrorAction SilentlyContinue).Source; " +
+                        "if (-not $codexExe) {{ " +
+                        "$codexExe = Get-ChildItem -Path (Join-Path $env:LOCALAPPDATA 'OpenAI\\Codex\\bin\\*\\codex.exe') " +
+                        "-File -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | " +
+                        "Select-Object -First 1 -ExpandProperty FullName; " +
+                        "}}; " +
+                        "if (-not $codexExe) {{ throw 'Codex CLI was not found. Install or update the Codex app, then restart SOLIDWORKS.' }}; " +
+                        "& $codexExe{1}",
+                        codexLaunchDir,
+                        codexResumeArg);
                 case "cmd":
                     return string.Format("Set-Location -LiteralPath '{0}'; cmd", safeDir);
                 default:         return string.Format("Set-Location -LiteralPath '{0}'", safeDir);
