@@ -119,6 +119,19 @@ MCP configuration:
 - Name: `swapi-pilot`
 - URL: `https://swapi-pilot.com/mcp`
 
+### Codex API-key authentication
+
+This fork defaults the task pane to Codex and removes Claude from the tool selector.
+Codex CLI can use either a ChatGPT login or an OpenAI API key. To switch the local
+Codex CLI to API-key authentication without storing the key in this repository, run:
+
+```powershell
+.\scripts\configure-codex-api.ps1
+```
+
+The script reads the key as hidden input and passes it to `codex login --with-api-key`
+through standard input.
+
 ---
 
 ## Interface Overview
