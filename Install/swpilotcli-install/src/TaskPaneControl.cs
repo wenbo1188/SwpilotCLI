@@ -99,9 +99,9 @@ namespace SwpilotCLIAddin
         private Label    lblHint;
 
         // ── Tool list ────────────────────────────────────────────────────────
-        // This local build is dedicated to Codex-backed SOLIDWORKS automation.
-        // Keep shell options for diagnostics, but do not offer or default to Claude.
-        private readonly string[] ToolNames = { "codex", "PS", "cmd" };
+        // This build defaults to Codex-backed SOLIDWORKS automation but keeps
+        // the original Claude option and shell options for compatibility.
+        private readonly string[] ToolNames = { "codex", "claude", "PS", "cmd" };
         private string currentTool = "codex";
 
         // ── About info (bump on each release) ────────────────────────────────

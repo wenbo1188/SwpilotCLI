@@ -121,7 +121,8 @@ MCP configuration:
 
 ### Codex API-key authentication
 
-This fork defaults the task pane to Codex and removes Claude from the tool selector.
+This fork defaults the task pane to Codex; the original Claude option remains
+available in the tool selector.
 Codex CLI can use either a ChatGPT login or an OpenAI API key. To switch the local
 Codex CLI to API-key authentication without storing the key in this repository, run:
 
